@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Password Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Password Analyzer, Generator, and Pronouncer</h1>
+        
+        <form method="post">
+            <div class="form-group">
+                <h2>Analyze Password</h2>
+                <input type="text" name="password_to_analyze" placeholder="Enter password">
+                <button type="submit">Analyze</button>
+            </div>
+        </form>
+
+        <form method="post">
+            <div class="form-group">
+                <h2>Generate Password</h2>
+                <button type="submit" name="generate_password">Generate</button>
+            </div>
+        </form>
+
+        {% if analysis %}
+        <div class="analysis-results">
+            <h3>Analysis Score: {{ analysis.score }}</h3>
+            <p>Length: {{ analysis.length }}</p>
+            <p>Uppercase Letters: {{ analysis.upper_count }}</p>
+            <p>Lowercase Letters: {{ analysis.lower_count }}</p>
+            <p>Digits: {{ analysis.digit_count }}</p>
+            <p>Special Characters: {{ analysis.special_count }}</p>
+        </div>
+        {% endif %}
+        
+        {% if generated_password %}
+        <h3>Generated Password: {{ generated_password }}</h3>
+        {% endif %}
+        
+        {% if suggestion_analysis %}
+        <div class="suggestion">
+            <h3>Suggested Strong Password: {{ generated_password }}</h3>
+            <h3>Analysis of Suggested Password:</h3>
+            <p>Analysis Score: {{ suggestion_analysis.score }}</p>
+            <p>Length: {{ suggestion_analysis.length }}</p>
+            <p>Uppercase Letters: {{ suggestion_analysis.upper_count }}</p>
+            <p>Lowercase Letters: {{ suggestion_analysis.lower_count }}</p>
+            <p>Digits: {{ suggestion_analysis.digit_count }}</p>
+            <p>Special Characters: {{ suggestion_analysis.special_count }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
